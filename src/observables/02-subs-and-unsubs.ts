@@ -15,19 +15,15 @@ const interval$ = new Observable<number>((subs) => {
     console.log(count);
   }, 1000);
 
-  setTimeout(() => {
-    subs.complete();
-  }, 2500);
-
   return () => {
     clearInterval(interval);
     console.log('interval destroyed');
   };
 });
 
-const subscription = interval$.subscribe(observer);
-const subscription2 = interval$.subscribe(observer);
-const subscription3 = interval$.subscribe(observer);
+const subscription = interval$.subscribe();
+const subscription2 = interval$.subscribe();
+const subscription3 = interval$.subscribe();
 
 setTimeout(() => {
   subscription.unsubscribe();
@@ -35,4 +31,4 @@ setTimeout(() => {
   subscription3.unsubscribe();
 
   console.log('complete timeout');
-}, 6000);
+}, 3000);
